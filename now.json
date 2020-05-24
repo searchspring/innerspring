@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "env": {
+  },
+  "builds": [
+    {
+      "src": "www/**",
+      "use": "@now/static"
+    },
+    {
+      "src": "api/index.go",
+      "use": "@now/go"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "api/index.go"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "www/$1"
+    }
+  ]
+}
