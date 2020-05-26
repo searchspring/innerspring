@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"strings"
 	"testing"
 
@@ -32,6 +33,7 @@ func TestBadUser(t *testing.T) {
 	require.Equal(t, 403, w.Result().StatusCode)
 
 	w = httptest.NewRecorder()
+	os.Setenv("DOMAIN", "searchspring.com")
 	wrapSignedInUserCheck(func(authorizationToken string) (string, error) {
 		return "notsearchspring@example.com", nil
 	}, nil)(w, r)

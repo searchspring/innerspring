@@ -3,6 +3,7 @@ package api
 import (
 	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/gorilla/mux"
@@ -46,9 +47,9 @@ func wrapSignedInUserCheck(checkUserLoggedIn func(authorizationToken string) (st
 			common.WriteError(w, 403, err.Error())
 			return
 		} else {
-			// TODO move this domain check to environment variable
-			if !strings.HasSuffix(email, "@searchspring.com") {
-				common.WriteError(w, 403, "must have searchspring.com email address to use this systsem")
+			domain := strings.TrimSpace(os.Getenv("DOMAIN"))
+			if domain != "" && !strings.HasSuffix(email, "@"+domain) {
+				common.WriteError(w, 403, "must have "+domain+" email address to use this systsem")
 				return
 			}
 			u := &model.User{

@@ -20,5 +20,5 @@ let Project = {
                 m('iframe', { class: 'flex-1', src: 'https://service.us2.sumologic.com/ui/dashboard.html?k=L9QWiaqGyHhljC9OdCgNs2RHOMrqqaCpgbbil6QsqPNyCZg7koQNFc93UMlG&f=&t=r', width: '600px', height: '400px' })
             ])
         ]
-    },
+    }
 }
